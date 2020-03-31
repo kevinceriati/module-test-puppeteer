@@ -35,6 +35,24 @@ describe("Tests basiques", () => {
         expect(html).toContain("powered by Polr 2");
     }, timeout);
 
+    // parcours client avec sign up
+    test('sign up', async () => {
+        await page.goto('http://polr.web-74.com');
+        await page.waitForSelector('#navbar li a');
+        // click sur le lien "About" de la navigation
+        await page.evaluate( () => {
+            Array
+                .from( document.querySelectorAll( '#navbar li a' ) )
+                .filter( el => el.textContent === 'Sign Up' )[0].click();
+        });
+        // on attent que l'élément ".sign-up" soit chargé
+        await page.waitForSelector('.login-prompt');
+        // on récupère le code HTML
+        const html = await page.$eval('.login-prompt', e => e.innerHTML);
+        // on vérifie qu'il contient la bonne chaîne de caractères
+        expect(html).toContain("prout");
+    }, timeout);
+
 
     // cette fonction est lancée avant chaque test de cette
     // série de tests
