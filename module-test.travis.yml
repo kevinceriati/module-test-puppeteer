@@ -1,7 +1,0 @@
-language: node-js
-rvm:
- - 8
-
-notifications:
-  email:
-     - ceriati.kevin1@gmail.com
